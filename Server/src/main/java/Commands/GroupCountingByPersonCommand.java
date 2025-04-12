@@ -2,7 +2,11 @@ package Commands;
 
 import Collections.CollectionManager;
 import Collections.Ticket;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Команда для группировки билетов по росту человека (Person) и подсчета количества элементов в каждой группе.

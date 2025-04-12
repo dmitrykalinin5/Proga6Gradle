@@ -1,6 +1,5 @@
 package Validaters;
 
-import Collections.Person;
 import Tools.Validation;
 
 /**

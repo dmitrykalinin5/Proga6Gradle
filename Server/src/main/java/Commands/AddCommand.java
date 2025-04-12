@@ -1,14 +1,14 @@
 package Commands;
 
+import Collections.CollectionManager;
+import Validaters.*;
+import Collections.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import Collections.CollectionManager;
-import Collections.*;
-import Validaters.*;
+import java.util.Scanner;
 
 /**
  * Команда для добавления нового элемента в коллекцию.

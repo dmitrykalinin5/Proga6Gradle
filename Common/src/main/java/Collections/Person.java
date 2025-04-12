@@ -27,7 +27,7 @@ public class Person implements Serializable {
      * @param weight Вес (знач > 0)
      * @param location Локация (x, y, z) (может быть null)
      */
-    public Person(java.time.ZonedDateTime birthday, Long height, int weight, Location location) {
+    public Person(ZonedDateTime birthday, Long height, int weight, Location location) {
 //        PersonValidator personvalidator = new PersonValidator(birthday, height, weight);
 //        personvalidator.validateOrThrow();
 
