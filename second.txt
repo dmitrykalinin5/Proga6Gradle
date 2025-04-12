@@ -1,0 +1,4 @@
+show
+execute_script third.txt
+help
+info
