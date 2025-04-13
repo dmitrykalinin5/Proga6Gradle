@@ -26,11 +26,11 @@ public class CommandProcessor {
     private ObjectInputStream in;
     private String role;
 
-    public CommandProcessor(CollectionManager collectionManager, Deque<String> historyDeque, ObjectOutputStream out, ObjectInputStream in, String role) {
+    public CommandProcessor(CollectionManager collectionManager, Deque<String> historyDeque, String role) {
         this.collectionManager = collectionManager;
         this.historyDeque = historyDeque;
-        this.out = out;
-        this.in = in;
+//        this.out = out;
+//        this.in = in;
         this.role = role;
     }
 

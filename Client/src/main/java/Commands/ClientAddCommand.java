@@ -80,7 +80,7 @@ public class ClientAddCommand implements Command{
             Location location = locationValidation.getLocation();
 
             Person person = new Person(birthday, height, weight, location);
-            this.ticket = new Ticket(newId, name, coordinates, date, price, ticketType, person);
+            this.ticket = new Ticket(999, name, coordinates, date, price, ticketType, person);
 
 //            if (commandProcessor.getScriptFlag()) {this.collectionManager.getQueue().add(ticket);}
         } catch (NumberFormatException e) {
