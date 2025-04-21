@@ -5,11 +5,11 @@ import Collections.Ticket;
 import java.util.HashMap;
 
 public class ClientCommandProcessor {
-    private HashMap<String, Command> commands;
+    private HashMap<String, Command> commands = new HashMap<>();
 
     public void ClientCommandPut() {
         commands.put("add", new ClientAddCommand());
-        commands.put("update", new ClientAddCommand());
+//        commands.put("update", new ClientAddCommand());
     }
 
     public Ticket execute(String[] args) {

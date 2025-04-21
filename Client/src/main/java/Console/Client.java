@@ -40,7 +40,7 @@ public class Client {
             socketChannel.register(selector, SelectionKey.OP_CONNECT | SelectionKey.OP_WRITE | SelectionKey.OP_READ);
 
             while (!socketChannel.finishConnect()) {
-
+                Thread.sleep(50);
             }
 
             System.out.println("Подключено к серверу");
@@ -89,7 +89,7 @@ public class Client {
 
         } catch (IOException e) {
             System.out.println("Ошибка в подключении " + e.getMessage());
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
@@ -115,7 +115,7 @@ public class Client {
 
     private static Response receiveResponse(SocketChannel channel) throws IOException, ClassNotFoundException {
         // Чтение данных из канала в буфер
-        ByteBuffer buffer = ByteBuffer.allocate(256);  // Увеличьте размер буфера, если нужно
+        ByteBuffer buffer = ByteBuffer.allocate(4096);  // Увеличьте размер буфера, если нужно
         int bytesRead = channel.read(buffer);
 
         if (bytesRead == -1) {
@@ -145,7 +145,7 @@ public class Client {
 
     private static void handleRead(SelectionKey key) throws IOException {
         SocketChannel channel = (SocketChannel) key.channel();
-        ByteBuffer buffer = ByteBuffer.allocate(256);
+        ByteBuffer buffer = ByteBuffer.allocate(4096);
         int bytesRead = channel.read(buffer);
 
         if (bytesRead == -1) {
@@ -166,57 +166,4 @@ public class Client {
         channel.write(buffer);
         key.interestOps(SelectionKey.OP_READ); // После записи переключаем на чтение
     }
-
-    private static void sendMessage(SocketChannel channel, String message) {
-        try {
-            ByteBuffer buffer = ByteBuffer.wrap(message.getBytes());
-            channel.write(buffer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-//        try (Socket socket = new Socket("localhost", 6133);
-//             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-//             ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
-//
-//            while (true) {
-//                System.out.print("Введите команду: ");
-//                String input = userInput();
-//                Request request;
-//
-//                if (input.equals("exit")) {
-//                    request = new Request("exit", null);
-//                    out.writeObject(request);
-//                    out.flush();
-//                    Response response = (Response) in.readObject();
-//                    System.out.println(response.message());
-//                    System.exit(0);
-//                }
-//
-//                // Парсишь команду, можешь использовать CommandProcessor, если хочешь
-//                // Здесь формируем объект Request
-//
-//
-//                Object argument = null;
-//                if (commandProcessor.isClientCommand(input)) {
-//                    argument = commandProcessor.executeArgumentCommand(input);
-//                }
-//                request = new Request(input, argument);
-//
-//                // Отправка запроса на сервер
-//                out.writeObject(request);
-//                out.flush();
-//
-//                // Получение ответа
-//                Response response = (Response) in.readObject();
-//                System.out.println(response.message());
-//            }
-//
-//        } catch (IOException e) {
-//            System.err.println("Некорректный ввод");
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }

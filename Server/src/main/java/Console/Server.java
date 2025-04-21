@@ -39,6 +39,7 @@ public class Server {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         serverSocketChannel.configureBlocking(false);
         serverSocketChannel.socket().bind(new java.net.InetSocketAddress(PORT));
+        System.out.println("Сервер слушает порт " + PORT);
 
         commandProcessor = new CommandProcessor(collectionManager, historyDeque, "server");
         commandProcessor.CommandPut();
@@ -68,54 +69,6 @@ public class Server {
             }
         }
     }
-//        try (ServerSocket serverSocket = new ServerSocket(6133)) {
-//            logger.info("Сервер запущен");
-//
-//            while (true) {
-//                try (Socket clientSocket = serverSocket.accept();
-//                     ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
-//                     ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());) {
-//
-//
-//
-//                    logger.info("Клиент подключен");
-//
-//                    String responseText;
-//                    while (true) {
-//                        Object obj = in.readObject();
-//                        if (obj instanceof Request request) {
-//                            String command = request.commandName();
-//                            Ticket argument = (Ticket) request.argument();
-//
-//                            if (argument != null) {
-//                                collectionManager.getQueue().add(argument);
-//                                responseText = ("Элемент добавлен в коллекцию");
-//                            } else {
-//                                responseText = commandProcessor.executeCommand(command);
-//                            }
-//
-//                            out.writeObject(new Response(responseText));
-//                            out.flush();
-//
-//                            if ("exit".equals(command)) {
-//                                logger.info("Клиент завершил сессию командой exit");
-//                                break;
-//                            }
-//                        }
-//
-//                        logger.info("Ответ отправлен клиенту");
-//                    }
-//                } catch (EOFException | SocketException e) {
-//                    logger.error("Клиент отключился");
-//                } catch (ClassNotFoundException | IOException e) {
-//                    logger.error("Произошла ошибка при обработке клиента");
-//                    e.printStackTrace(); // логируем ошибку
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     public void handleAccept(ServerSocketChannel serverSocketChannel, Selector selector) throws IOException {
         SocketChannel clientChannel = serverSocketChannel.accept();
@@ -152,7 +105,7 @@ public class Server {
     }
 
     private Request receiveRequest(SocketChannel clientChannel) throws IOException, ClassNotFoundException {
-        ByteBuffer buffer = ByteBuffer.allocate(256);  // Размер буфера, при необходимости увеличьте
+        ByteBuffer buffer = ByteBuffer.allocate(4096);  // Размер буфера, при необходимости увеличьте
         int bytesRead = clientChannel.read(buffer);
 
         if (bytesRead == -1) {
@@ -198,15 +151,5 @@ public class Server {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         collectionManager.loadFromFile();
         new Server(collectionManager, historyDeque).run();
-//        new Thread(() -> {
-//            Server server = new Server(collectionManager, historyDeque);
-//            server.run();
-//        }).start();
-//
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
     }
 }
