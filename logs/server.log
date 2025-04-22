@@ -530,3 +530,10 @@ coordinates: 1234, 4567.0
 2025-04-22 15:23:44 [main] INFO  Console.Server - Текущая команда: info
 2025-04-22 15:23:47 [main] INFO  Console.Server - Ответ отправлен клиенту
 2025-04-22 15:23:55 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-22 16:02:45 [main] INFO  Console.Server - Сервер запущен
+2025-04-22 16:03:01 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:51529
+2025-04-22 16:03:05 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-22 16:03:07 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-22 16:03:09 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-22 16:03:10 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-22 16:03:31 [main] WARN  Console.Server - Ошибка при обработке клиента: Connection reset

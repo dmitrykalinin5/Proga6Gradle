@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Команда для группировки билетов по росту человека (Person) и подсчета количества элементов в каждой группе.
@@ -35,27 +36,16 @@ public class GroupCountingByPersonCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
-        // Группируем билеты по росту
-        Map<Long, List<Ticket>> groupedByHeight = new HashMap<>();
-
-        // Проходим по всем тикетам в коллекции и группируем их по росту
-        for (Ticket ticket : collectionManager.getQueue()) {
-            long height = ticket.getPerson().getHeight(); // Получаем рост из объекта Person
-            groupedByHeight.computeIfAbsent(height, k -> new ArrayList<>()).add(ticket);
-        }
+        Map<Long, List<Ticket>> groupedByHeight = collectionManager.getQueue().stream()
+                .collect(Collectors.groupingBy(ticket -> ticket.getPerson().getHeight()));
 
         // Строим строку с количеством билетов в каждой группе
-        StringBuilder result = new StringBuilder();
-        for (Map.Entry<Long, List<Ticket>> entry : groupedByHeight.entrySet()) {
-            long height = entry.getKey();
-            int count = entry.getValue().size();
-            result.append("Рост: ").append(height)
-                    .append(" - Количество элементов: ").append(count)
-                    .append("\n");
-        }
+        String result = groupedByHeight.entrySet().stream()
+                .map(entry -> "Рост: " + entry.getKey() + " - Количество элементов: " + entry.getValue().size())
+                .collect(Collectors.joining("\n"));
 
         // Выводим результат
-        response(result.toString());
+        response(result);
     }
 
     @Override

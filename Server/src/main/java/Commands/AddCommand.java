@@ -30,7 +30,6 @@ public class AddCommand implements Command {
     public Ticket ServerExecute(Ticket argument) {
         int nextId = collectionManager.getNextId();
         Ticket correctedTicket = argument;
-        // создаём новый Ticket с теми же данными, но правильным id
         if (argument.getId() == 999) {
             correctedTicket = new Ticket(
                     nextId,

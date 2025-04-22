@@ -29,8 +29,6 @@ public class CommandProcessor {
     public CommandProcessor(CollectionManager collectionManager, Deque<String> historyDeque, String role) {
         this.collectionManager = collectionManager;
         this.historyDeque = historyDeque;
-//        this.out = out;
-//        this.in = in;
         this.role = role;
     }
 
@@ -124,12 +122,6 @@ public class CommandProcessor {
 
     public BufferedInputStream getInputStream() {
         return new BufferedInputStream(in);
-    }
-
-    public boolean isClientCommand(String input) {
-        String[] parts = input.split(" ");
-        String commandName = parts[0];
-        return commands.containsKey(commandName);
     }
 
     public void setCommandStack(Deque<String> commandStack) {

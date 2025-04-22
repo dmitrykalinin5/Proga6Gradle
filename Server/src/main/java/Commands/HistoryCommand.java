@@ -30,9 +30,9 @@ public class HistoryCommand implements Command {
     @Override
     public void execute(String[] args) {
         String[] commands = commandProcessor.getDeque().toArray(new String[0]);
-        System.out.println("Список последних 13 команд:");
+        result = "Список последних 13 команд:\n";
         for (int i = commands.length - 1, index = 1; i >= 0; i--, index++) {
-            System.out.println(index + ". " + commands[i]);
+            result += (index + ". " + commands[i] + "\n");
         }
     }
 
