@@ -111,6 +111,7 @@ public class Client {
         channel.close();
         channel = SocketChannel.open();
         channel.configureBlocking(false);
+        Thread.sleep(3000);
         while (!channel.connect(new java.net.InetSocketAddress(SERVER_IP, SERVER_PORT))) {
             System.out.println("Переподключение");
             Thread.sleep(1000);
