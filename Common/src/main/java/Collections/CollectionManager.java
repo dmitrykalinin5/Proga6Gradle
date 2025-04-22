@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Класс для управления коллекцией
@@ -24,11 +25,9 @@ public class CollectionManager {
      * @return nextId
      */
     public int getNextId() {
-        // Собираем все существующие id
-        Set<Integer> existingIds = new HashSet<>();
-        for (Ticket ticket : this.queue) {
-            existingIds.add(ticket.getId());
-        }
+        Set<Integer> existingIds = queue.stream()
+                .map(Ticket::getId)
+                .collect(Collectors.toSet());
         int nextId = 1;
         while (existingIds.contains(nextId)) {
             nextId++;

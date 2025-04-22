@@ -84,16 +84,15 @@ public class CommandProcessor {
         }
     }
 
-    public String executeCommand(String input) {
-        String[] parts = input.split(" ");
-        String commandName = parts[0];
+    public String executeCommand(String[] args) {
+        String commandName = args[0];
         Command command = commands.get(commandName);
         try {
-            command.execute(parts);
-            saveCommand(parts[0]);
+            command.execute(args);
+            saveCommand(args[0]);
             return command.getResponse();
         } catch (NullPointerException exception) {
-            return "Некорректный ввод";
+            return "Некорректный ввод" + exception.getMessage();
         }
     }
 

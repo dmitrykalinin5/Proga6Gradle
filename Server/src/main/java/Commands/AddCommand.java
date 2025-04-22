@@ -27,6 +27,24 @@ public class AddCommand implements Command {
         this.commandProcessor = commandProcessor;
     }
 
+    public Ticket ServerExecute(Ticket argument) {
+        int nextId = collectionManager.getNextId();
+        Ticket correctedTicket = argument;
+        // создаём новый Ticket с теми же данными, но правильным id
+        if (argument.getId() == 999) {
+            correctedTicket = new Ticket(
+                    nextId,
+                    argument.getName(),
+                    argument.getCoordinates(),
+                    argument.getCreationDate(),
+                    argument.getPrice(),
+                    argument.getType(),
+                    argument.getPerson()
+            );
+        }
+        return correctedTicket;
+    }
+
     /**
      * Выполняет команду добавления нового билета в коллекцию.
      * Запрашивает у пользователя данные для создания объекта Ticket, валидирует их

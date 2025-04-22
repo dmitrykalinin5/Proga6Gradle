@@ -9,7 +9,7 @@ public class ClientCommandProcessor {
 
     public void ClientCommandPut() {
         commands.put("add", new ClientAddCommand());
-//        commands.put("update", new ClientAddCommand());
+        commands.put("update", new UpdateIdClientCommand());
     }
 
     public Ticket execute(String[] args) {
@@ -18,8 +18,13 @@ public class ClientCommandProcessor {
             command.execute(args);
             return (Ticket) command.getTicket();
         } catch (NullPointerException e) {
-            System.out.println("null pointer");
+            System.out.println("null pointer" + e.getMessage());
         }
         return null;
     }
+
+    public boolean hasCommand(String name) {
+        return commands.containsKey(name);
+    }
+
 }

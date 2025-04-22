@@ -40,6 +40,36 @@ public class UpdateIdCommand implements Command {
         this.commandProcessor = commandProcessor;
     }
 
+    public Ticket ServerExecute(Ticket ticket) {
+        int id = ticket.getId();
+        queue = collectionManager.getQueue();
+        for (Ticket t : queue) {
+            if (t.getId() == id) {
+                if (ticket.getName() != null) { t.setName(ticket.getName()); }
+                if (ticket.getCoordinates() != null) { t.setCoordinates(ticket.getCoordinates()); }
+                if (ticket.getPrice() != null) { t.setPrice(ticket.getPrice()); }
+                if (ticket.getType() != null) { t.setType(ticket.getType()); }
+                if (ticket.getPerson() != null) {
+                    if (ticket.getBirthday() != null) {
+                        t.setBirthday(ticket.getBirthday());
+                    }
+                    if (ticket.getHeight() != null) {
+                        t.setHeight(ticket.getHeight());
+                    }
+                    if (ticket.getWeight() != -1) {
+                        t.setWeight(ticket.getWeight());
+                    }
+                    if (ticket.getLocation() != null) {
+                        t.setLocation(ticket.getLocation());
+                    }
+                }
+                this.ticket = t;
+                System.out.println("тикет: " + this.ticket);
+            }
+        }
+        return this.ticket;
+    }
+
     /**
      * Выполняет команду обновления элемента коллекции по его id.
      * Запрашивает у пользователя информацию для обновления элемента (имя, координаты, цену и другие параметры)

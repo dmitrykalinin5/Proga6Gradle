@@ -1,8 +1,10 @@
 package Console;
 
 import Collections.CollectionManager;
-import Collections.Ticket;
+import Collections.*;
+import Commands.AddCommand;
 import Commands.CommandProcessor;
+import Commands.UpdateIdCommand;
 import Network.Request;
 import Network.Response;
 import org.apache.logging.log4j.LogManager;
@@ -15,10 +17,7 @@ import java.nio.channels.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Однопоточный сервер, принимающий команды по TCP
@@ -77,31 +76,55 @@ public class Server {
         logger.info("Клиент подключен: " + clientChannel.getRemoteAddress());
     }
 
-    private void handleRead(SelectionKey key) throws IOException, ClassNotFoundException {
+    private Person mergePerson(Person incoming, Person existing) {
+        if (incoming == null) return existing;
+
+        return new Person(
+                incoming.getBirthday() != null ? incoming.getBirthday() : existing.getBirthday(),
+                incoming.getHeight() != null ? incoming.getHeight() : existing.getHeight(),
+                incoming.getWeight() != 0 ? incoming.getWeight() : existing.getWeight(),
+                incoming.getLocation() != null ? incoming.getLocation() : existing.getLocation()
+        );
+    }
+
+    private void handleRead(SelectionKey key) {
         SocketChannel clientChannel = (SocketChannel) key.channel();
 
-        // Получаем Request от клиента
-        Request request = receiveRequest(clientChannel);
+        try {
+            Request request = receiveRequest(clientChannel);
 
-        // Обрабатываем команду
-        String command = request.commandName();
-        Ticket argument = (Ticket) request.argument();
-        String responseText;
+            String[] args = request.args();
+            String command = args[0];
+            Ticket argument = (Ticket) request.argument();
+            String responseText;
+            Ticket correctedTicket;
 
-        if (argument != null) {
-            collectionManager.getQueue().add(argument);
-            responseText = "Элемент добавлен в коллекцию";
-        } else {
-            responseText = commandProcessor.executeCommand(command);
+            if (argument != null) {
+                if (Objects.equals(command, "add")) {
+                    AddCommand add = (AddCommand) commandProcessor.getCommand("add");
+                    correctedTicket = add.ServerExecute(argument);
+                } else if (Objects.equals(command, "update")) {
+                    UpdateIdCommand update = (UpdateIdCommand) commandProcessor.getCommand("update");
+                    correctedTicket = update.ServerExecute(argument);
+                } else { correctedTicket = null;}
+                collectionManager.getQueue().add(correctedTicket);
+                responseText = "Элемент добавлен в коллекцию";
+            } else {
+                responseText = commandProcessor.executeCommand(args);
+            }
+
+            Response response = new Response(responseText);
+            sendResponse(clientChannel, response);
+            logger.info("Ответ отправлен клиенту");
+
+        } catch (IOException | ClassNotFoundException e) {
+            logger.warn("Ошибка при обработке клиента: " + e.getMessage());
+            try {
+                clientChannel.close();
+            } catch (IOException ex) {
+                logger.error("Ошибка при закрытии канала", ex);
+            }
         }
-
-        // Создаем ответ
-        Response response = new Response(responseText);
-
-        // Отправляем Response обратно клиенту
-        sendResponse(clientChannel, response);
-
-        logger.info("Ответ отправлен клиенту: " + response.message());
     }
 
     private Request receiveRequest(SocketChannel clientChannel) throws IOException, ClassNotFoundException {

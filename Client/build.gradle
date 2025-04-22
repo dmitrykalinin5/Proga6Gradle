@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 application {
@@ -17,6 +18,18 @@ repositories {
 
 dependencies {
     implementation project(':Common')
+}
+
+mainClassName = 'Console.Client' // <-- твой главный класс
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': mainClassName
+        )
+    }
+    archiveBaseName.set("client")
+    archiveVersion.set("") // без -1.0-SNAPSHOT
 }
 
 test {

@@ -26,7 +26,8 @@ public class BirthdayValidation implements Validation {
                 this.birthday = input;
                 String[] inputSplit = this.birthday.split("\\.");
                 if (inputSplit[0].length() != 2 || inputSplit[1].length() != 2 || inputSplit[2].length() != 4) {
-                    System.out.println("Некорректный ввод");
+                    System.out.println("Некорректный ввод, попробуйте еще раз");
+                    input = scanner.nextLine().trim();
                     continue;
                 }
                 int day = Integer.parseInt(inputSplit[0]);

@@ -21,7 +21,7 @@ public class ExitCommand implements Command {
     @Override
     public void execute(String[] args) {
         this.commandProcessor.ServerCommandPut();
-        this.commandProcessor.executeCommand("save");
+        this.commandProcessor.executeCommand(new String[]{"save"});
         response("Завершение программы..");
     }
 

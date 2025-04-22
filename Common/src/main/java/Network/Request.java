@@ -2,4 +2,4 @@ package Network;
 
 import java.io.Serializable;
 
-public record Request(String commandName, Object argument) implements Serializable {}
+public record Request(String[] args, Object argument) implements Serializable {}

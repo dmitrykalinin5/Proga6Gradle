@@ -1,6 +1,7 @@
 package Console;
 
 
+import Collections.*;
 import Commands.ClientCommandProcessor;
 import Network.*;
 
@@ -40,56 +41,53 @@ public class Client {
             socketChannel.register(selector, SelectionKey.OP_CONNECT | SelectionKey.OP_WRITE | SelectionKey.OP_READ);
 
             while (!socketChannel.finishConnect()) {
-                Thread.sleep(50);
+                // ждем покдлючение
             }
 
             System.out.println("Подключено к серверу");
 
-            // Поток для обработки ввода
-            new Thread(() -> {
-                while (true) {
-                    System.out.print("Введите команду: ");
-                    String input = userInput();
-                    if (input.equals("exit")) {
-                        try {
-                            socketChannel.close();
-                            System.exit(0);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+            while (true) {
+                // Ввод команды пользователем
+                System.out.print("Введите команду: ");
+                String input = userInput();
+                if (input.equalsIgnoreCase("exit")) {
+                    socketChannel.close();
+                    System.out.println("Выход.");
+                    break;
+                }
+
+                String[] argsArr = input.split(" ");
+                String commandName = argsArr[0];
+                Ticket ticket = null;
+
+                if (commandProcessor.hasCommand(commandName)) {
+                    ticket = commandProcessor.execute(argsArr);
+                }
+
+                Request request = new Request(argsArr, ticket);
+                sendMessage(socketChannel, request);
+
+                boolean responseReceived = false;
+                while (!responseReceived) {
+                    selector.select(); // блокирующее ожидание до готовности канала
+                    Set<SelectionKey> selectedKeys = selector.selectedKeys();
+
+                    for (SelectionKey key : selectedKeys) {
+                        if (key.isConnectable()) {
+                            handleConnect(key);
+                        } else if (key.isReadable()) {
+                            Response response = receiveResponse((SocketChannel) key.channel());
+                            System.out.println("Ответ от сервера: " + response.message());
+                            responseReceived = true;
                         }
                     }
-
-
-                    Request request = new Request(input, null);
-                    try {
-                        sendMessage(socketChannel, request);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    selectedKeys.clear();
                 }
-            }).start();
-
-            // Обработка событий ввода/вывода
-            while (true) {
-                selector.select();
-
-                Set<SelectionKey> selectedKeys = selector.selectedKeys();
-                for (SelectionKey key : selectedKeys) {
-                    if (key.isConnectable()) {
-                        handleConnect(key);
-                    } else if (key.isReadable()) {
-                        Response response = receiveResponse((SocketChannel) key.channel());
-                        System.out.println("Ответ от сервера: " + response.message());
-                    } else if (key.isWritable()) {
-                        handleWrite(key);
-                    }
-                }
-                selectedKeys.clear();
             }
 
         } catch (IOException e) {
             System.out.println("Ошибка в подключении " + e.getMessage());
-        } catch (ClassNotFoundException | InterruptedException e) {
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -143,27 +141,4 @@ public class Client {
         }
     }
 
-    private static void handleRead(SelectionKey key) throws IOException {
-        SocketChannel channel = (SocketChannel) key.channel();
-        ByteBuffer buffer = ByteBuffer.allocate(4096);
-        int bytesRead = channel.read(buffer);
-
-        if (bytesRead == -1) {
-            channel.close();
-            System.out.println("Соединение закрыто сервером");
-            return;
-        }
-
-        String response = new String(buffer.array(), 0, bytesRead);
-        System.out.println("Ответ от сервера: " + response);
-    }
-
-    private static void handleWrite(SelectionKey key) throws IOException {
-        // Пишем данные в канал (пишется только, если сервер готов)
-        SocketChannel channel = (SocketChannel) key.channel();
-        String message = "Hello from Client!";
-        ByteBuffer buffer = ByteBuffer.wrap(message.getBytes());
-        channel.write(buffer);
-        key.interestOps(SelectionKey.OP_READ); // После записи переключаем на чтение
-    }
 }
