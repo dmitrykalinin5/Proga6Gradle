@@ -108,17 +108,27 @@ public class Client {
     }
 
     private static void reconnect(SocketChannel channel, Selector selector) throws IOException, InterruptedException {
-        channel.close();
+        channel.close();  // Закрываем старое соединение
+
+        // Ожидание, чтобы сервер мог обработать предыдущее подключение
+        Thread.sleep(1000);  // Пауза перед новым подключением
+
         channel = SocketChannel.open();
         channel.configureBlocking(false);
-        Thread.sleep(3000);
-        while (!channel.connect(new java.net.InetSocketAddress(SERVER_IP, SERVER_PORT))) {
-            System.out.println("Переподключение");
-            Thread.sleep(1000);
+        boolean isConnected = false;
+
+        while (!isConnected) {
+            try {
+                isConnected = channel.connect(new java.net.InetSocketAddress(SERVER_IP, SERVER_PORT));  // Пытаемся подключиться
+            } catch (IOException e) {
+                System.out.println("Ошибка при подключении. Повторная попытка...");
+                Thread.sleep(5000);  // Подождем 5 секунд перед повторной попыткой
+            }
         }
 
         System.out.println("Подключено к серверу");
-        selector.selectNow();
+
+        selector.selectNow();  // Переходим к следующему шагу после подключения
     }
 
     private static void sendMessage(SocketChannel channel, Request request) throws IOException {

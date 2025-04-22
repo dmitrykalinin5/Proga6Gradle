@@ -565,3 +565,8 @@ coordinates: 1234, 4567.0
 2025-04-22 19:24:00 [main] INFO  Console.Server - Сервер запущен
 2025-04-22 19:24:23 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:52412
 2025-04-22 19:24:24 [main] WARN  Console.Server - Connection reset
+2025-04-22 19:30:06 [main] INFO  Console.Server - Сервер запущен
+2025-04-22 19:30:20 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:52609
+2025-04-22 19:30:28 [main] INFO  Console.Server - Сервер запущен
+2025-04-22 19:30:43 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:52613
+2025-04-22 19:30:43 [main] WARN  Console.Server - Connection reset
