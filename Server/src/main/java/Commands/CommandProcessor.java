@@ -90,7 +90,7 @@ public class CommandProcessor {
             saveCommand(args[0]);
             return command.getResponse();
         } catch (NullPointerException exception) {
-            return "Некорректный ввод" + exception.getMessage();
+            return "Некорректный ввод";
         }
     }
 

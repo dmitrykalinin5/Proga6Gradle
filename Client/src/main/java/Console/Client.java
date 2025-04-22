@@ -77,7 +77,7 @@ public class Client {
                             handleConnect(key);
                         } else if (key.isReadable()) {
                             Response response = receiveResponse((SocketChannel) key.channel());
-                            System.out.println("Ответ от сервера: " + response.message());
+                            System.out.println(response.message());
                             responseReceived = true;
                         }
                     }
