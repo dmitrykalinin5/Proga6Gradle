@@ -35,7 +35,10 @@ public class Client {
         try {
             SocketChannel socketChannel = SocketChannel.open();
             socketChannel.configureBlocking(false);
+
             socketChannel.connect(new java.net.InetSocketAddress(SERVER_IP, SERVER_PORT));
+
+
 
             Selector selector = Selector.open();
             socketChannel.register(selector, SelectionKey.OP_CONNECT | SelectionKey.OP_WRITE | SelectionKey.OP_READ);
@@ -65,26 +68,38 @@ public class Client {
                 }
 
                 Request request = new Request(argsArr, ticket);
-                sendMessage(socketChannel, request);
 
                 boolean responseReceived = false;
                 while (!responseReceived) {
-                    selector.select(); // блокирующее ожидание до готовности канала
-                    Set<SelectionKey> selectedKeys = selector.selectedKeys();
+                    try {
 
-                    for (SelectionKey key : selectedKeys) {
-                        if (key.isConnectable()) {
-                            handleConnect(key);
-                        } else if (key.isReadable()) {
-                            Response response = receiveResponse((SocketChannel) key.channel());
-                            System.out.println(response.message());
-                            responseReceived = true;
+                        sendMessage(socketChannel, request);
+                        selector.select(); // блокирующее ожидание до готовности канала
+                        Set<SelectionKey> selectedKeys = selector.selectedKeys();
+
+                        for (SelectionKey key : selectedKeys) {
+                            if (key.isConnectable()) {
+                                handleConnect(key);
+                            } else if (key.isReadable()) {
+                                Response response = receiveResponse((SocketChannel) key.channel());
+                                System.out.println(response.message());
+                                responseReceived = true;
+                            }
+                        }
+                        selectedKeys.clear();
+                    } catch (IOException e) {
+                        // Ошибка чтения или соединения
+                        System.out.println("Соединение потеряно: " + e.getMessage());
+                        System.out.println("Попытка переподключения...");
+                        try {
+                            reconnect(socketChannel, selector);  // Попытка переподключения
+                            sendMessage(socketChannel, request);  // Повторная отправка запроса
+                        } catch (IOException | InterruptedException ex) {
+                            System.out.println("Ошибка переподключения: " + ex.getMessage());
                         }
                     }
-                    selectedKeys.clear();
                 }
             }
-
         } catch (IOException e) {
             System.out.println("Ошибка в подключении " + e.getMessage());
         } catch (ClassNotFoundException e) {
@@ -92,8 +107,20 @@ public class Client {
         }
     }
 
+    private static void reconnect(SocketChannel channel, Selector selector) throws IOException, InterruptedException {
+        channel.close();
+        channel = SocketChannel.open();
+        channel.configureBlocking(false);
+        while (!channel.connect(new java.net.InetSocketAddress(SERVER_IP, SERVER_PORT))) {
+            System.out.println("Переподключение");
+            Thread.sleep(1000);
+        }
+
+        System.out.println("Подключено к серверу");
+        selector.selectNow();
+    }
+
     private static void sendMessage(SocketChannel channel, Request request) throws IOException {
-        // Сериализация объекта Request в байтовый массив
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream)) {
             objectOutputStream.writeObject(request);
@@ -103,7 +130,7 @@ public class Client {
         ByteBuffer buffer = ByteBuffer.allocate(requestBytes.length);
 
         buffer.put(requestBytes);
-        buffer.flip();  // Подготовка к записи в канал
+        buffer.flip();
 
         // Отправка данных
         while (buffer.hasRemaining()) {
@@ -112,21 +139,19 @@ public class Client {
     }
 
     private static Response receiveResponse(SocketChannel channel) throws IOException, ClassNotFoundException {
-        // Чтение данных из канала в буфер
-        ByteBuffer buffer = ByteBuffer.allocate(4096);  // Увеличьте размер буфера, если нужно
+        ByteBuffer buffer = ByteBuffer.allocate(4096);
         int bytesRead = channel.read(buffer);
 
         if (bytesRead == -1) {
             throw new IOException("Соединение закрыто сервером.");
         }
 
-        buffer.flip();  // Подготовка к чтению
+        buffer.flip();
 
-        // Извлекаем байты из буфера
         byte[] responseBytes = new byte[buffer.remaining()];
         buffer.get(responseBytes);
 
-        // Десериализация байтов в объект Response
+        // десереал
         try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(responseBytes);
              ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream)) {
             return (Response) objectInputStream.readObject();
