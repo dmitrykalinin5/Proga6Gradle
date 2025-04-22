@@ -32,22 +32,17 @@ public class Client {
     public static void main(String[] args) {
         commandProcessor.ClientCommandPut();
 
+        SocketChannel socketChannel = null;
+        Selector selector = null;
+
         try {
-            SocketChannel socketChannel = SocketChannel.open();
+            socketChannel = SocketChannel.open();
             socketChannel.configureBlocking(false);
 
-            socketChannel.connect(new java.net.InetSocketAddress(SERVER_IP, SERVER_PORT));
+            selector = Selector.open();
 
-
-
-            Selector selector = Selector.open();
-            socketChannel.register(selector, SelectionKey.OP_CONNECT | SelectionKey.OP_WRITE | SelectionKey.OP_READ);
-
-            while (!socketChannel.finishConnect()) {
-                // ждем покдлючение
-            }
-
-            System.out.println("Подключено к серверу");
+            // Используем новый метод connect для начального подключения
+            connect(socketChannel, selector);
 
             while (true) {
                 // Ввод команды пользователем
@@ -72,9 +67,8 @@ public class Client {
                 boolean responseReceived = false;
                 while (!responseReceived) {
                     try {
-
                         sendMessage(socketChannel, request);
-                        selector.select(); // блокирующее ожидание до готовности канала
+                        selector.select();
                         Set<SelectionKey> selectedKeys = selector.selectedKeys();
 
                         for (SelectionKey key : selectedKeys) {
@@ -107,28 +101,31 @@ public class Client {
         }
     }
 
-    private static void reconnect(SocketChannel channel, Selector selector) throws IOException, InterruptedException {
-        channel.close();  // Закрываем старое соединение
+    private static void connect(SocketChannel channel, Selector selector) throws IOException {
 
-        // Ожидание, чтобы сервер мог обработать предыдущее подключение
-        Thread.sleep(1000);  // Пауза перед новым подключением
+        // Метод для подключения (используется как при первом подключении, так и при переподключении)
+        channel.connect(new java.net.InetSocketAddress(SERVER_IP, SERVER_PORT));
 
-        channel = SocketChannel.open();
-        channel.configureBlocking(false);
-        boolean isConnected = false;
+        channel.register(selector, SelectionKey.OP_CONNECT | SelectionKey.OP_WRITE | SelectionKey.OP_READ);
 
-        while (!isConnected) {
-            try {
-                isConnected = channel.connect(new java.net.InetSocketAddress(SERVER_IP, SERVER_PORT));  // Пытаемся подключиться
-            } catch (IOException e) {
-                System.out.println("Ошибка при подключении. Повторная попытка...");
-                Thread.sleep(5000);  // Подождем 5 секунд перед повторной попыткой
-            }
+        // Ждем завершения подключения
+        while (!channel.finishConnect()) {
+            // Пауза для завершения подключения
         }
 
         System.out.println("Подключено к серверу");
+    }
 
-        selector.selectNow();  // Переходим к следующему шагу после подключения
+    private static void reconnect(SocketChannel channel, Selector selector) throws IOException, InterruptedException {
+        // Закрытие старого канала и повторное подключение
+        channel.close();
+        SocketChannel socketChannel = SocketChannel.open();
+        socketChannel.configureBlocking(false);
+
+        selector = Selector.open();
+        System.out.println("Ожидание переподключения...");
+        Thread.sleep(1000);  // Пауза перед попыткой переподключения
+        connect(channel, selector);  // Повторное подключение с использованием метода connect
     }
 
     private static void sendMessage(SocketChannel channel, Request request) throws IOException {
