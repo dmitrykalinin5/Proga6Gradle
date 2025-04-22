@@ -118,7 +118,7 @@ public class Server {
             logger.info("Ответ отправлен клиенту");
 
         } catch (IOException | ClassNotFoundException e) {
-            logger.warn("Ошибка при обработке клиента: " + e.getMessage());
+            logger.warn(e.getMessage());
             try {
                 clientChannel.close();
             } catch (IOException ex) {
