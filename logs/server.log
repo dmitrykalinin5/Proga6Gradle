@@ -576,3 +576,23 @@ coordinates: 1234, 4567.0
 2025-04-22 19:39:46 [main] INFO  Console.Server - Сервер запущен
 2025-04-22 19:40:02 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:52737
 2025-04-22 19:40:16 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 13:43:46 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 13:46:19 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63397
+2025-04-29 13:46:39 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 13:48:10 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 13:48:14 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63414
+2025-04-29 13:48:24 [main] WARN  Console.Server - Connection reset
+2025-04-29 13:48:26 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63423
+2025-04-29 13:48:38 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 13:48:46 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63430
+2025-04-29 13:49:02 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 13:54:08 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 13:54:20 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63497
+2025-04-29 13:54:31 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 13:58:44 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 13:58:59 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63527
+2025-04-29 13:59:17 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 13:59:21 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63531
+2025-04-29 13:59:22 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63532
+2025-04-29 13:59:23 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63533
+2025-04-29 13:59:24 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63534

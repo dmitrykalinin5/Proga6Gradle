@@ -81,13 +81,9 @@ public class Client {
                             }
                         }
                         selectedKeys.clear();
-                    } catch (IOException e) {
+                    } catch (IOException | ClassNotFoundException e) {
                         // Ошибка чтения или соединения
                         System.out.println("Соединение потеряно: " + e.getMessage());
-                        System.out.println("Попытка переподключения...");
-                        try {
-                            reconnect(socketChannel, selector);  // Попытка переподключения
-                            sendMessage(socketChannel, request);  // Повторная отправка запроса
                         } catch (IOException | InterruptedException ex) {
                             System.out.println("Ошибка переподключения: " + ex.getMessage());
                         }
@@ -114,18 +110,6 @@ public class Client {
         }
 
         System.out.println("Подключено к серверу");
-    }
-
-    private static void reconnect(SocketChannel channel, Selector selector) throws IOException, InterruptedException {
-        // Закрытие старого канала и повторное подключение
-        channel.close();
-        SocketChannel socketChannel = SocketChannel.open();
-        socketChannel.configureBlocking(false);
-
-        selector = Selector.open();
-        System.out.println("Ожидание переподключения...");
-        Thread.sleep(1000);  // Пауза перед попыткой переподключения
-        connect(channel, selector);  // Повторное подключение с использованием метода connect
     }
 
     private static void sendMessage(SocketChannel channel, Request request) throws IOException {
