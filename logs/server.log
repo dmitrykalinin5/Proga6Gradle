@@ -560,16 +560,31 @@ coordinates: 1234, 4567.0
 2025-04-22 19:19:11 [main] INFO  Console.Server - Сервер запущен
 2025-04-22 19:19:16 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:52333
 2025-04-22 19:19:17 [main] WARN  Console.Server - Connection reset
+2025-04-22 19:20:09 [main] INFO  Console.Server - Сервер запущен
+2025-04-22 19:20:18 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:60334
+2025-04-22 19:20:30 [main] INFO  Console.Server - Сервер запущен
+2025-04-22 19:20:45 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:60342
+2025-04-22 19:20:46 [main] WARN  Console.Server - Connection reset
 2025-04-22 19:23:43 [main] INFO  Console.Server - Сервер запущен
 2025-04-22 19:23:44 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:52403
 2025-04-22 19:24:00 [main] INFO  Console.Server - Сервер запущен
 2025-04-22 19:24:23 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:52412
 2025-04-22 19:24:24 [main] WARN  Console.Server - Connection reset
+2025-04-22 19:27:27 [main] INFO  Console.Server - Сервер запущен
+2025-04-22 19:27:38 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:60453
+2025-04-22 19:27:50 [main] INFO  Console.Server - Сервер запущен
+2025-04-22 19:28:11 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:60469
+2025-04-22 19:28:12 [main] WARN  Console.Server - Connection reset
 2025-04-22 19:30:06 [main] INFO  Console.Server - Сервер запущен
 2025-04-22 19:30:20 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:52609
 2025-04-22 19:30:28 [main] INFO  Console.Server - Сервер запущен
 2025-04-22 19:30:43 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:52613
 2025-04-22 19:30:43 [main] WARN  Console.Server - Connection reset
+2025-04-22 19:32:33 [main] INFO  Console.Server - Сервер запущен
+2025-04-22 19:32:41 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:60531
+2025-04-22 19:32:54 [main] INFO  Console.Server - Сервер запущен
+2025-04-22 19:33:10 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:60535
+2025-04-22 19:33:10 [main] WARN  Console.Server - Connection reset
 2025-04-22 19:37:27 [main] INFO  Console.Server - Сервер запущен
 2025-04-22 19:37:44 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:52575
 2025-04-22 19:37:56 [main] INFO  Console.Server - Сервер запущен
@@ -596,3 +611,142 @@ coordinates: 1234, 4567.0
 2025-04-29 13:59:22 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63532
 2025-04-29 13:59:23 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63533
 2025-04-29 13:59:24 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:63534
+2025-04-29 16:37:20 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 16:37:44 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:52722
+2025-04-29 16:37:54 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 17:42:39 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 17:42:47 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54396
+2025-04-29 17:43:40 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 17:51:51 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 17:52:00 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54654
+2025-04-29 17:52:06 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:52:08 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:52:14 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:52:16 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:52:19 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:54:55 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 17:55:03 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54716
+2025-04-29 17:55:08 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:55:08 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:55:08 [main] WARN  Console.Server - invalid stream header: 04617267
+2025-04-29 17:55:08 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54721
+2025-04-29 17:55:41 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:55:41 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:55:41 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:55:46 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:55:51 [main] WARN  Console.Server - Соединение закрыто клиентом.
+2025-04-29 17:55:51 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54733
+2025-04-29 17:56:22 [main] WARN  Console.Server - Соединение закрыто клиентом.
+2025-04-29 17:56:22 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54736
+2025-04-29 17:56:30 [main] WARN  Console.Server - Connection reset
+2025-04-29 17:56:31 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54740
+2025-04-29 17:56:42 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:56:42 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:56:42 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:56:44 [main] WARN  Console.Server - Соединение закрыто клиентом.
+2025-04-29 17:56:58 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54745
+2025-04-29 17:57:17 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 17:57:22 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54754
+2025-04-29 17:57:48 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:57:48 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:57:48 [main] WARN  Console.Server - invalid stream header: 04617267
+2025-04-29 17:57:48 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54755
+2025-04-29 17:57:59 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:57:59 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:57:59 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:58:14 [main] WARN  Console.Server - Соединение закрыто клиентом.
+2025-04-29 17:58:19 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54759
+2025-04-29 17:58:22 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:58:22 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:58:22 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:58:26 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:58:35 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 17:58:39 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54763
+2025-04-29 17:58:43 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:58:43 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:58:43 [main] WARN  Console.Server - invalid stream header: 04617267
+2025-04-29 17:58:46 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54768
+2025-04-29 17:59:04 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 17:59:21 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54778
+2025-04-29 17:59:42 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:42 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:42 [main] WARN  Console.Server - invalid stream header: 0F4E6574
+2025-04-29 17:59:43 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54783
+2025-04-29 17:59:46 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:46 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:46 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:47 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:48 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:48 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:49 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:49 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:50 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:50 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:51 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 17:59:51 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:02:00 [main] WARN  Console.Server - Соединение закрыто клиентом.
+2025-04-29 18:05:10 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:05:19 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54847
+2025-04-29 18:05:33 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:05:33 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:05:33 [main] WARN  Console.Server - invalid stream header: 04617267
+2025-04-29 18:05:33 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54848
+2025-04-29 18:08:40 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:08:42 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54895
+2025-04-29 18:08:49 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:08:51 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:08:53 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:08:58 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:09:03 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:54901
+2025-04-29 18:09:06 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:18:37 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:18:45 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55019
+2025-04-29 18:19:01 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:19:18 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55023
+2025-04-29 18:29:08 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:30:19 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:30:22 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55317
+2025-04-29 18:30:34 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:30:59 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55337
+2025-04-29 18:30:59 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:31:01 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:32:02 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:32:09 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55382
+2025-04-29 18:32:25 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:32:41 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55398
+2025-04-29 18:32:44 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:32:46 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:35:03 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:35:11 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55437
+2025-04-29 18:36:21 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:36:33 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55454
+2025-04-29 18:36:41 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:36:44 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:38:11 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:38:11 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55477
+2025-04-29 18:38:25 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:38:37 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55481
+2025-04-29 18:38:44 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:38:48 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:41:53 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:41:54 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55517
+2025-04-29 18:42:10 [main] WARN  Console.Server - Connection reset
+2025-04-29 18:42:23 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:42:24 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55536
+2025-04-29 18:44:21 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:44:27 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55613
+2025-04-29 18:45:58 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:46:04 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55691
+2025-04-29 18:46:04 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:46:28 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:48:48 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:48:55 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55709
+2025-04-29 18:48:58 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:49:04 [main] INFO  Console.Server - Сервер запущен
+2025-04-29 18:49:17 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55714
+2025-04-29 18:49:17 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:49:22 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:49:26 [main] WARN  Console.Server - Соединение закрыто клиентом.
+2025-04-29 18:49:30 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55719
+2025-04-29 18:49:33 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-04-29 18:49:44 [main] WARN  Console.Server - Соединение закрыто клиентом.

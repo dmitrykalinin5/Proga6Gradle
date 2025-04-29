@@ -108,7 +108,7 @@ public class Server {
                     correctedTicket = update.ServerExecute(argument);
                 } else { correctedTicket = null;}
                 collectionManager.getQueue().add(correctedTicket);
-                responseText = "Элемент добавлен в коллекцию";
+                responseText = "[ОТВЕТ ОТ СЕРВЕРА] Элемент добавлен в коллекцию";
             } else {
                 responseText = commandProcessor.executeCommand(args);
             }
