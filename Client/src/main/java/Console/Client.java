@@ -20,6 +20,7 @@ public class Client {
     private static Selector selector;
     private static SocketChannel socketChannel;
     private static final Queue<Request> pendingRequests = new LinkedList<>();
+    private static int retries = 0;
 
     public static String userInput() {
         System.out.print("Введите команду: ");
@@ -31,7 +32,7 @@ public class Client {
 
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws InterruptedException {
         commandProcessor.ClientCommandPut();
 
         boolean sent = true;
@@ -84,7 +85,15 @@ public class Client {
                     }
                 }
             } catch ( IOException | ClassNotFoundException e ) {
-                System.out.println("Ошибка: " + e.getMessage());
+                if (retries < 5) {
+                    System.out.println("Ошибка: " + e.getMessage());
+                    System.out.println("Переподключение...");
+                } else {
+                    System.out.println("Достигнут лимит переподключений. Завершение работы клиента..");
+                    System.exit(0);
+                }
+                Thread.sleep(3000);
+                retries++;
             }
         }
     }

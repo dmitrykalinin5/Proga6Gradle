@@ -750,3 +750,12 @@ coordinates: 1234, 4567.0
 2025-04-29 18:49:30 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:55719
 2025-04-29 18:49:33 [main] INFO  Console.Server - Ответ отправлен клиенту
 2025-04-29 18:49:44 [main] WARN  Console.Server - Соединение закрыто клиентом.
+2025-05-05 19:55:51 [main] INFO  Console.Server - Сервер запущен
+2025-05-05 19:55:51 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:50903
+2025-05-05 19:56:58 [main] WARN  Console.Server - Connection reset
+2025-05-05 19:59:40 [main] INFO  Console.Server - Сервер запущен
+2025-05-05 19:59:48 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:51063
+2025-05-05 20:02:40 [main] INFO  Console.Server - Сервер запущен
+2025-05-05 20:02:40 [main] INFO  Console.Server - Клиент подключен: /127.0.0.1:51116
+2025-05-05 20:02:49 [main] INFO  Console.Server - Ответ отправлен клиенту
+2025-05-05 20:04:00 [main] WARN  Console.Server - Connection reset
