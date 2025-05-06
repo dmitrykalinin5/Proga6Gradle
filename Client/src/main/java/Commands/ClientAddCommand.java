@@ -82,7 +82,6 @@ public class ClientAddCommand implements Command{
             Person person = new Person(birthday, height, weight, location);
             this.ticket = new Ticket(999, name, coordinates, date, price, ticketType, person);
 
-//            if (commandProcessor.getScriptFlag()) {this.collectionManager.getQueue().add(ticket);}
         } catch (NumberFormatException e) {
             response("Некорректный ввод: " + e.getMessage());
         }
