@@ -28,7 +28,7 @@ public class InfoCommand implements Command {
     @Override
     public void execute(String[] args) {
         String info = "Информация о коллекции:\nДата создания: " + collectionManager.getCreationTime().toString()
-                + "\nКол-во элементов: " + collectionManager.collectionSize();
+                + "\nКол-во элементов: " + collectionManager.collectionSize() + "\n";
         response(info);
     }
 

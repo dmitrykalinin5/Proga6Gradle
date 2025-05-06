@@ -88,7 +88,7 @@ public class CommandProcessor {
         try {
             command.execute(args);
             saveCommand(args[0]);
-            return "[ОТВЕТ ОТ СЕРВЕРА] " + command.getResponse();
+            return "\n[ОТВЕТ ОТ СЕРВЕРА] " + command.getResponse();
         } catch (NullPointerException exception) {
             return "Некорректный ввод";
         }

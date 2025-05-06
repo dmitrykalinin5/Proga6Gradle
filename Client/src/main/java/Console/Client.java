@@ -20,6 +20,7 @@ public class Client {
     private static Selector selector;
     private static SocketChannel socketChannel;
     private static final Queue<Request> pendingRequests = new LinkedList<>();
+    private static final Queue<Request> pendingRequests2 = new LinkedList<>();
     private static int retries = 0;
 
     public static String userInput() {
@@ -72,14 +73,24 @@ public class Client {
                         while (iterator.hasNext()) {
                             SelectionKey key = iterator.next();
                             iterator.remove();
-                            if (key.isWritable()) {
-                                sendMessage(socketChannel);
-                                sent = true;
+
+                            if (pendingRequests.isEmpty() && !pendingRequests2.isEmpty()) {
+                                pendingRequests.add(pendingRequests2.poll());
+                            } else if (!pendingRequests.isEmpty()) {
+                                pendingRequests2.clear();
                             }
+
                             if (key.isReadable()) {
                                 Response response = receiveResponse((SocketChannel) key.channel());
                                 System.out.println(response.message());
                                 responseReceived = true;
+                                pendingRequests2.clear();
+                                pendingRequests.clear();
+                            }
+                            if (key.isWritable() && !responseReceived) {
+                                sendMessage(socketChannel);
+                                Thread.sleep(1000);
+                                sent = true;
                             }
                         }
                     }
@@ -88,17 +99,17 @@ public class Client {
                 if (retries < 5) {
                     System.out.println("Ошибка: " + e.getMessage());
                     System.out.println("Переподключение...");
+                    Thread.sleep(2000);
+                    retries++;
                 } else {
-                    System.out.println("Достигнут лимит переподключений. Завершение работы клиента..");
-                    System.exit(0);
+                    System.out.println("Достигнут лимит переподключений. Завершение работы клиента...");
+                    break;
                 }
-                Thread.sleep(3000);
-                retries++;
             }
         }
     }
 
-    private static void connect() throws IOException {
+    private static void connect() throws IOException, InterruptedException {
         socketChannel = SocketChannel.open();
         socketChannel.configureBlocking(false);
         selector = Selector.open();
@@ -109,6 +120,8 @@ public class Client {
         }
 
         System.out.println("Подключение установлено");
+        Thread.sleep(2000);
+//        sendMessage(socketChannel);
     }
 
     private static void sendMessage(SocketChannel channel) throws IOException {
@@ -130,6 +143,8 @@ public class Client {
                     return;
                 }
             }
+
+            pendingRequests2.add(request);
 
             pendingRequests.poll();
         }
