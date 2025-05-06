@@ -136,12 +136,11 @@ public class Server {
             throw new IOException("Соединение закрыто клиентом.");
         }
 
-        buffer.flip();  // Переводим буфер в режим чтения
+        buffer.flip();
 
         byte[] data = new byte[buffer.remaining()];
         buffer.get(data);
 
-        // Десериализация объекта Request
         try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(data);
              ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream)) {
             return (Request) objectInputStream.readObject();
@@ -149,7 +148,6 @@ public class Server {
     }
 
     private void sendResponse(SocketChannel clientChannel, Response response) throws IOException {
-        // Сериализация объекта Response в байтовый массив
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream)) {
             objectOutputStream.writeObject(response);
@@ -158,9 +156,8 @@ public class Server {
         byte[] responseBytes = byteArrayOutputStream.toByteArray();
         ByteBuffer buffer = ByteBuffer.allocate(responseBytes.length);
         buffer.put(responseBytes);
-        buffer.flip();  // Подготовка к записи в канал
+        buffer.flip();
 
-        // Отправка данных
         while (buffer.hasRemaining()) {
             clientChannel.write(buffer);
         }

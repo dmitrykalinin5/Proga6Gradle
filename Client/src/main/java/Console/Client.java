@@ -4,12 +4,9 @@ package Console;
 import Collections.*;
 import Commands.ClientCommandProcessor;
 import Network.*;
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.*;
 import java.nio.channels.*;
 import java.nio.ByteBuffer;
-import java.net.Socket;
 import java.util.*;
 
 
@@ -139,7 +136,6 @@ public class Client {
             while (buffer.hasRemaining()) {
                 int written = channel.write(buffer);
                 if (written == 0) {
-                    // Канал временно не может писать — выйдем и подождём следующего OP_WRITE
                     return;
                 }
             }
